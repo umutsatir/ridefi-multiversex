@@ -1,0 +1,30 @@
+use multiversx_sc_scenario::*;
+
+fn world() -> ScenarioWorld {
+    let mut blockchain = ScenarioWorld::new();
+
+    blockchain.set_current_dir_from_workspace("contracts/nft-minter");
+    blockchain.register_contract(
+        "mxsc:output/nft-minter.mxsc.json",
+        nft_minter::ContractBuilder,
+    );
+    blockchain
+}
+
+#[test]
+#[ignore = "not supported"]
+fn buy_nft_rs() {
+    world().run("scenarios/buy_nft.scen.json");
+}
+
+#[test]
+#[ignore = "not supported"]
+fn create_nft_rs() {
+    world().run("scenarios/create_nft.scen.json");
+}
+
+#[test]
+#[ignore = "not supported"]
+fn init_rs() {
+    world().run("scenarios/init.scen.json");
+}
