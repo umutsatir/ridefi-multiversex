@@ -1,43 +1,24 @@
+import { MxLink } from 'components';
+import { RouteNamesEnum } from 'localConstants';
 import { AuthRedirectWrapper, PageWrapper } from 'wrappers';
-import { Transaction } from './Transaction';
+
 
 export const Home = () => {
   return (
     <AuthRedirectWrapper requireAuth={false}>
-      <PageWrapper>
-        <div className='flex flex-col-reverse sm:flex-row items-center h-full w-full'>
-          <div className='flex items-start sm:items-center h-full sm:w-1/2 sm:bg-center'>
-            <div className='flex flex-col gap-2 max-w-[70sch] text-center sm:text-left text-xl font-medium md:text-2xl lg:text-3xl'>
-              <div>
-                <h1>Template dApp</h1>
-                <p className='text-gray-400'>
-                  The{' '}
-                  <a
-                    href='https://www.npmjs.com/package/@multiversx/sdk-dapp'
-                    target='_blank'
-                    className='text-gray-400 underline decoration-dotted hover:decoration-solid'
-                  >
-                    sdk-dapp
-                  </a>{' '}
-                  starter project for any dApp{' '}
-                  <br className='hidden xl:block' />
-                  built on the{' '}
-                  <a
-                    href='https://multiversx.com/'
-                    target='_blank'
-                    className='text-gray-400 underline decoration-dotted hover:decoration-solid'
-                  >
-                    MultiversX
-                  </a>{' '}
-                  blockchain.
-                </p>
-              </div>
-              <Transaction />
+
+        <div className='flex justify-around items-center w-9/12 h-10/12 max-w-8xl'>
+
+            <div className='text-center w-auto max-w-3xl'>
+              <h1 className='text-7xl font-bold text-blue-500 '>RideFi</h1>
+              <p className='m-[30px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis consequatur consequuntur facilis iure esse? Quos tenetur ipsam laudantium exercitationem quibusdam adipisci aspernatur. Exercitationem molestiae, porro totam placeat impedit maxime harum.</p>
+              <MxLink to={RouteNamesEnum.dashboard}>Discover Car</MxLink>
+            </div>
+
+            <div>
+              <img src="https://picsum.photos/500/300" alt="PHOTO" className='rounded-[20px]'/>
             </div>
           </div>
-          <div className='h-4/6 bg-mvx-white bg-contain bg-no-repeat w-1/2 bg-center' />
-        </div>
-      </PageWrapper>
     </AuthRedirectWrapper>
   );
 };
