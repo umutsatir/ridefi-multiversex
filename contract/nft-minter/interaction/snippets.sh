@@ -1,19 +1,22 @@
-ALICE="" # PEM path
-ADDRESS=$(mxpy data load --key=address-devnet)
-DEPLOY_TRANSACTION=$(mxpy data load --key=deployTransaction-devnet)
-PROXY=https://devnet-gateway.multiversx.com
-CHAIN_ID=D
+ALICE="~/Desktop/local-projects/blockchain/ridefi-multiversex/wallet/wallet-owner.pem" # PEM path
+ADDRESS=$(mxpy data load --key=address-testnet)
+DEPLOY_TRANSACTION=$(mxpy data load --key=deployTransaction-testnet)
+PROXY=https://testnet-gateway.multiversx.com
+CHAIN_ID=T
+BYTECODE="~/Desktop/local-projects/blockchain/ridefi-multiversex/nft-minter/output/nft-minter.wasm"
 
 deploy() {
-    mxpy --verbose contract deploy --project=${PROJECT} --recall-nonce --pem=${ALICE} \
-    --gas-limit=100000000 \
-    --send --outfile="deploy-devnet.interaction.json" --proxy=${PROXY} --chain=${CHAIN_ID} || return
+    mxpy --verbose contract deploy --bytecode=/Users/umutsatir/Desktop/local-projects/blockchain/ridefi-multiversex/contract/nft-minter/output/nft-minter.wasm \
+    --recall-nonce --pem=/Users/umutsatir/Desktop/local-projects/blockchain/ridefi-multiversex/wallet/wallet-owner.pem \
+    --gas-limit=10000000 \
+    --send --outfile="deploy-devnet.interaction.json" --wait-result \
+    --proxy=https://devnet-gateway.multiversx.com --chain=D
 
-    TRANSACTION=$(mxpy data parse --file="deploy-devnet.interaction.json" --expression="data['emittedTransactionHash']")
-    ADDRESS=$(mxpy data parse --file="deploy-devnet.interaction.json" --expression="data['contractAddress']")
+    TRANSACTION=$(mxpy data parse --file="deploy-testnet.interaction.json" --expression="data['emittedTransactionHash']")
+    ADDRESS=$(mxpy data parse --file="deploy-testnet.interaction.json" --expression="data['contractAddress']")
 
-    mxpy data store --key=address-devnet --value=${ADDRESS}
-    mxpy data store --key=deployTransaction-devnet --value=${TRANSACTION}
+    mxpy data store --key=address-testnet --value=${ADDRESS}
+    mxpy data store --key=deployTransaction-testnet --value=${TRANSACTION}
 
     echo ""
     echo "Smart contract address: ${ADDRESS}"

@@ -15,7 +15,7 @@ multiversx_sc_wasm_adapter::allocator!();
 multiversx_sc_wasm_adapter::panic_handler!();
 
 multiversx_sc_wasm_adapter::endpoints! {
-    nft_minter
+    nft-minter
     (
         init => init
         createNft => create_nft
@@ -27,4 +27,4 @@ multiversx_sc_wasm_adapter::endpoints! {
     )
 }
 
-multiversx_sc_wasm_adapter::async_callback! { nft_minter }
+multiversx_sc_wasm_adapter::async_callback! { nft-minter }

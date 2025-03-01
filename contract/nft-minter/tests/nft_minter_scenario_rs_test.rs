@@ -6,7 +6,7 @@ fn world() -> ScenarioWorld {
     blockchain.set_current_dir_from_workspace("contracts/nft-minter");
     blockchain.register_contract(
         "mxsc:output/nft-minter.mxsc.json",
-        nft_minter::ContractBuilder,
+        nft-minter::ContractBuilder,
     );
     blockchain
 }
