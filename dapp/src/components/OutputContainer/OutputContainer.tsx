@@ -14,7 +14,7 @@ export const OutputContainer = (props: OutputContainerPropsType) => {
 
     return (
         <div className="flex justify-between gap-4">
-            <img src="https://picsum.photos/150" alt="" />
+            <img src="https://picsum.photos/200" alt="" />
             <div
                 className={classNames(
                     "text-sm border border-gray-200 rounded w-1/2",
