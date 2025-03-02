@@ -19,7 +19,7 @@ export const Card = (props: CardType) => {
             data-testid={props["data-testid"]}
             id={anchor}
         >
-            <h2 className="flex text-xl font-medium group">
+            <h2 className="flex text-xl font-medium group mt-5">
                 {title}
                 <a
                     href={reference}

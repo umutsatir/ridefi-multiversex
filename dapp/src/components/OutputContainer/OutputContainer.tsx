@@ -12,6 +12,10 @@ interface OutputContainerPropsType
 export const OutputContainer = (props: OutputContainerPropsType) => {
     const { children, isLoading = false, className = "p-4" } = props;
 
+    const handleBuy = () => {
+        console.log("Buy button clicked");
+    };
+
     return (
         <div className="flex justify-between gap-4">
             <img src="https://picsum.photos/200" alt="" />

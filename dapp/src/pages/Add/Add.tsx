@@ -2,6 +2,7 @@ import { AuthRedirectWrapper } from "wrappers";
 import { useScrollToElement } from "hooks";
 import { brands } from "../../localConstants/brands";
 import { useState } from "react";
+import { sendTransactions } from "@multiversx/sdk-dapp";
 
 export const Add = () => {
     useScrollToElement();
@@ -19,18 +20,6 @@ export const Add = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(
-            selectedImage,
-            selectedBrand,
-            selectedModel,
-            selectedDescription,
-            selectedYear,
-            selectedFuelType,
-            selectedTransmission,
-            selectedMileage,
-            selectedHorsepower,
-            selectedPrice
-        );
     };
 
     return (
