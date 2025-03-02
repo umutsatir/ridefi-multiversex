@@ -11,18 +11,17 @@ export const Home = () => {
                         RideFi
                     </h1>
                     <p className="m-[30px]">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Reiciendis consequatur consequuntur facilis iure esse?
-                        Quos tenetur ipsam laudantium exercitationem quibusdam
-                        adipisci aspernatur. Exercitationem molestiae, porro
-                        totam placeat impedit maxime harum.
+                        The future of car ownership is here. Discover cars
+                        available for sale and rent on the blockchain. Use the
+                        power of blockchain technology to benefit from a secure,
+                        transparent, and efficient way to buy and sell cars.
                     </p>
-                    <MxLink to={RouteNamesEnum.dashboard}>Discover Car</MxLink>
+                    <MxLink to={RouteNamesEnum.dashboard}>Discover Cars</MxLink>
                 </div>
 
                 <div>
                     <img
-                        src="https://picsum.photos/500/300"
+                        src="../../../car.jpg"
                         alt="PHOTO"
                         className="rounded-[20px]"
                     />

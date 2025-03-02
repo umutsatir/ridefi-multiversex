@@ -47,15 +47,19 @@ export const Header = () => {
     };
 
     return (
-        <header className="flex flex-row align-center justify-between pl-6 pr-6 pt-6">
+        <header className="flex flex-row align-center justify-between">
             <MxLink
                 className="flex items-center justify-between"
                 to={isLoggedIn ? RouteNamesEnum.dashboard : RouteNamesEnum.home}
             >
-                <MultiversXLogo className="w-full h-6" />
+                <img
+                    src="../../../../ridefi-bg-removed.png"
+                    className="w-[100px] h-[100px]"
+                    alt=""
+                />
             </MxLink>
 
-            <nav className="h-full w-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent">
+            <nav className="h-full w-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent pr-6 pt-6">
                 <div className="flex justify-end container mx-auto items-center gap-2">
                     <MxLink to={RouteNamesEnum.add}>Add Car</MxLink>
                     <MxLink to={RouteNamesEnum.search}>AI Chat</MxLink>

@@ -20,9 +20,10 @@ export const Add = () => {
     const [selectedModel, setSelectedModel] = useState<string>("");
     const [selectedDescription, setSelectedDescription] = useState<string>("");
     const [selectedYear, setSelectedYear] = useState<number>(0);
-    const [selectedFuelType, setSelectedFuelType] = useState<string>("");
+    const [selectedFuelType, setSelectedFuelType] =
+        useState<string>("Gasoline");
     const [selectedTransmission, setSelectedTransmission] =
-        useState<string>("");
+        useState<string>("Manual");
     const [selectedMileage, setSelectedMileage] = useState<number>(0);
     const [selectedHorsepower, setSelectedHorsepower] = useState<number>(0);
     const [selectedPrice, setSelectedPrice] = useState<number>(0);
@@ -34,8 +35,8 @@ export const Add = () => {
 
         // const issue = smartContract.methodsExplicit
         //     .issueToken([
-        //         BytesValue.fromUTF8(selectedBrand),
-        //         BytesValue.fromUTF8(selectedBrand),
+        //         BytesValue.fromUTF8("AAAA"),
+        //         BytesValue.fromUTF8("AAAA"),
         //     ])
         //     .withValue("50000000000000000")
         //     .withSender(Address.fromString(address))
@@ -67,7 +68,6 @@ export const Add = () => {
                 },
             },
         });
-
         const tx = smartContract.methodsExplicit
             .createNft([
                 BytesValue.fromUTF8(selectedBrand.toUpperCase()),
@@ -169,7 +169,6 @@ export const Add = () => {
                             onChange={(e) =>
                                 setSelectedDescription(e.target.value)
                             }
-                            required
                         ></textarea>
                     </div>
                     <div className="flex flex-col w-3/5">
@@ -242,9 +241,7 @@ export const Add = () => {
                             }
                             required
                         >
-                            <option value="Gasoline" selected>
-                                Gasoline
-                            </option>
+                            <option value="Gasoline">Gasoline</option>
                             <option value="Diesel">Diesel</option>
                             <option value="Hybrid">Hybrid</option>
                             <option value="Electric">Electric</option>
@@ -262,9 +259,7 @@ export const Add = () => {
                             }
                             required
                         >
-                            <option value="Manual" selected>
-                                Manual
-                            </option>
+                            <option value="Manual">Manual</option>
                             <option value="Automatic">Automatic</option>
                         </select>
                     </div>

@@ -35,7 +35,8 @@ export const Details = () => {
         // The Gemini 1.5 models are versatile and work with most use cases
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const prompt = `Price prediction range for a car with the following features: brand:
+        const prompt = `Price prediction range for a car with the following features: 
+                        brand:
                         ${metadata.brand}
                         , model: 
                         ${metadata.model}
@@ -50,7 +51,10 @@ export const Details = () => {
                         , horsepower: 
                         ${metadata.horsepower}. Give only the price range in USD, from and to values.`;
 
-        const prompt2 = `Give overall score for a car with the following features: brand:
+        const prompt2 = `Give overall score for a car with the following features: 
+                        price:
+                        ${metadata.price * 20} USD
+                        brand:
                         ${metadata.brand}
                         , model: 
                         ${metadata.model}
@@ -58,12 +62,14 @@ export const Details = () => {
                         ${metadata.year}
                         , fuel type: 
                         ${metadata.fuelType}
-                        , transmission, 
+                        , transmission: 
                         ${metadata.transmission}
                         , mileage: 
                         ${metadata.mileage} miles
                         , horsepower: 
-                        ${metadata.horsepower}. Give only number from 0 to 100.`;
+                        ${
+                            metadata.horsepower
+                        }. Give only number from 0 to 100.`;
 
         const result = await model.generateContent([prompt]);
         const response = await result.response;
@@ -76,7 +82,7 @@ export const Details = () => {
         setProgressBarColor(
             widthVar <= 30
                 ? "oklch(0.627 0.194 149.214)"
-                : widthVar <= 60
+                : widthVar <= 70
                 ? "oklch(0.795 0.184 86.047)"
                 : "oklch(0.577 0.245 27.325)"
         );
@@ -91,7 +97,7 @@ export const Details = () => {
                         <img
                             src={"https://ipfs.io/ipfs/" + ipfsHash}
                             alt=""
-                            className="rounded-lg w-[500px] h-[500px]"
+                            className="rounded-lg w-[500px] h-[300px] self-center"
                         />
                         <div className="flex flex-col gap-2.5 w-2/5 p-4">
                             <div className="flex justify-between gap-1">

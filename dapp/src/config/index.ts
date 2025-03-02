@@ -3,7 +3,7 @@ import { EnvironmentsEnum } from "types";
 export * from "./sharedConfig";
 
 export const contractAddress =
-    "erd1qqqqqqqqqqqqqpgqxy3nt549jkewmskyx8s5n4ws3u2eqrufqylqpc80sc";
+    "erd1qqqqqqqqqqqqqpgqjmunm250k5e783kdxuwr8t3k3d48xxtrqylq45n8w4";
 export const API_URL = "https://testnet-api.multiversx.com";
 export const sampleAuthenticatedDomains = [API_URL];
 export const environment = EnvironmentsEnum.testnet;
