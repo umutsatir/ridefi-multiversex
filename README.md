@@ -28,7 +28,7 @@ First, create .env.local file in dapp folder, put these variables:
 
 Lastly, create config.env.ts file into dapp/config folder, put this constant:
 ```javascript
-export const GEMINI_API_KEY = "AIzaSyDGYAjf9nxFiw8T25RyZnkfGK5ZMf4bGgs";
+export const GEMINI_API_KEY = "YOUR_KEY";
 ```
 
 
