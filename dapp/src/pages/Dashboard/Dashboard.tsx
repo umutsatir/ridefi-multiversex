@@ -25,6 +25,7 @@ export const Dashboard = () => {
                     if (!metadata || isEmpty(metadata)) continue;
                     metadatas.push(metadata);
                 }
+                console.log(metadatas);
                 setNFTs(metadatas);
                 setLoading(false);
             })
