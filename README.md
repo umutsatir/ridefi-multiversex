@@ -2,8 +2,8 @@
 RideFi Car Buy/Sell Platform
 
 ## Who Are You:
-Name: Mehmet Nuri Başa
-Name: Alperen Çelik
+Name: Mehmet Nuri Başa,
+Name: Alperen Çelik,
 Name: Umut Satır
 
 ## Project details:
