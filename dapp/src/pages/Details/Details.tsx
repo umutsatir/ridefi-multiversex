@@ -37,32 +37,32 @@ export const Details = () => {
 
         const prompt = `Price prediction range for a car with the following features: brand:
                         ${metadata.brand}
-                        ", model: 
+                        , model: 
                         ${metadata.model}
-                        ", year: 
+                        , year: 
                         ${metadata.year}
-                        ", fuel type: "
+                        , fuel type: 
                         ${metadata.fuelType}
-                        ", transmission, 
+                        , transmission, 
                         ${metadata.transmission}
-                        ", mileage: 
-                        ${metadata.mileage}
-                        ", horsepower: 
+                        , mileage: 
+                        ${metadata.mileage} miles
+                        , horsepower: 
                         ${metadata.horsepower}. Give only the price range in USD, from and to values.`;
 
         const prompt2 = `Give overall score for a car with the following features: brand:
                         ${metadata.brand}
-                        ", model: 
+                        , model: 
                         ${metadata.model}
-                        ", year: 
+                        , year: 
                         ${metadata.year}
-                        ", fuel type: "
+                        , fuel type: 
                         ${metadata.fuelType}
-                        ", transmission, 
+                        , transmission, 
                         ${metadata.transmission}
-                        ", mileage: 
-                        ${metadata.mileage}
-                        ", horsepower: 
+                        , mileage: 
+                        ${metadata.mileage} miles
+                        , horsepower: 
                         ${metadata.horsepower}. Give only number from 0 to 100.`;
 
         const result = await model.generateContent([prompt]);

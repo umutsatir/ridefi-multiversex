@@ -12,6 +12,7 @@ import { isEmpty } from "@multiversx/sdk-core/out";
 export const Dashboard = () => {
     useScrollToElement();
     const [NFTs, setNFTs] = useState<any[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         fetch(API_URL + "/accounts/" + contractAddress + "/nfts")
@@ -25,9 +26,11 @@ export const Dashboard = () => {
                     metadatas.push(metadata);
                 }
                 setNFTs(metadatas);
+                setLoading(false);
             })
             .catch((error) => {
                 console.error(error);
+                setLoading(false);
             });
     }, []);
 
@@ -38,23 +41,27 @@ export const Dashboard = () => {
                     <h1 className="text-4xl font-bold mb-8">Recents</h1>
                 </div>
                 <div className="flex w-full justify-center">
-                    <div className="flex flex-wrap gap-10 w-full">
-                        {NFTs.map((element) => (
-                            <Widget
-                                key={element[0].ipfs_pin_hash}
-                                title={element[0].metadata.name}
-                                metadata={element[0].metadata}
-                                imageurl={
-                                    "https://ipfs.io/ipfs/" +
-                                    element[0].ipfs_pin_hash
-                                }
-                                reference={
-                                    "https://localhost:3000/details?nft=" +
-                                    element[0].ipfs_pin_hash
-                                }
-                            />
-                        ))}
-                    </div>
+                    {loading ? (
+                        <div>Loading...</div>
+                    ) : (
+                        <div className="flex flex-wrap gap-10 w-full">
+                            {NFTs.map((element) => (
+                                <Widget
+                                    key={element[0].ipfs_pin_hash}
+                                    title={element[0].metadata.name}
+                                    metadata={element[0].metadata}
+                                    imageurl={
+                                        "https://ipfs.io/ipfs/" +
+                                        element[0].ipfs_pin_hash
+                                    }
+                                    reference={
+                                        "https://localhost:3000/details?nft=" +
+                                        element[0].ipfs_pin_hash
+                                    }
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </AuthRedirectWrapper>
