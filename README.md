@@ -13,6 +13,25 @@ In addition, our platform integrates an artificial intelligence-powered pricing 
 ## Vision:
 Our blockchain-based car trading platform is set to revolutionize vehicle transactions with security, transparency, and AI-powered insights. With continuous enhancements, we aim to provide a seamless and reliable marketplace for buyers and sellers worldwide.
 
+
+## Environment Variables
+To run this project, you will need to add the following environment variables
+
+First, create .env.local file in dapp folder, put these variables:
+`VITE_PINATA_JWT`
+
+`VITE_PINATA_API_KEY`
+
+`DB_PASS`
+
+`VITE_PINATA_API_SECRET`
+
+Lastly, create config.env.ts file into dapp/config folder, put this constant:
+```javascript
+export const GEMINI_API_KEY = "AIzaSyDGYAjf9nxFiw8T25RyZnkfGK5ZMf4bGgs";
+```
+
+
 ## Screenshots:
 ![screencapture-localhost-3000-search-2025-03-02-14_54_03](https://github.com/user-attachments/assets/e23b0cd1-83b7-45fd-b811-d0ad719c9bfa)
 ![screencapture-localhost-3000-details-2025-03-02-14_54_20](https://github.com/user-attachments/assets/6a1a4c33-de05-440f-b86f-20d8cc0aad62)
