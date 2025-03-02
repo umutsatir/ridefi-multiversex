@@ -32,6 +32,16 @@ export const GEMINI_API_KEY = "AIzaSyDGYAjf9nxFiw8T25RyZnkfGK5ZMf4bGgs";
 ```
 
 
+## Run
+To run, you have 3 choices. First choice is to run at devnet. Second choice is to run at testnet. Last choice is to run at mainnet.
+```bash
+yarn start:testnet
+yarn start:devnet
+yarn start:mainnet
+```
+You can start the project with these commands in dapp folder.
+
+
 ## Screenshots:
 ![screencapture-localhost-3000-search-2025-03-02-14_54_03](https://github.com/user-attachments/assets/e23b0cd1-83b7-45fd-b811-d0ad719c9bfa)
 ![screencapture-localhost-3000-details-2025-03-02-14_54_20](https://github.com/user-attachments/assets/6a1a4c33-de05-440f-b86f-20d8cc0aad62)
