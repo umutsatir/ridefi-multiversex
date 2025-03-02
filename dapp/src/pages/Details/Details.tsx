@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import { pinata } from "utils/config";
 import { useEffect, useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { GEMINI_API_KEY } from "config/config.env";
+import { GEMINI_API_KEY } from "../../config/config.env";
 
 export const Details = () => {
     const search = useLocation().search;

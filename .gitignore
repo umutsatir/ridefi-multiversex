@@ -1,3 +1,4 @@
 dapp/node_modules
 node_modules
 dapp/.env.local
+dapp/src/config/config.env.ts
