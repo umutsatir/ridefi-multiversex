@@ -9,8 +9,8 @@ deploy() {
     mxpy --verbose contract deploy --bytecode=/Users/umutsatir/Desktop/local-projects/blockchain/ridefi-multiversex/contract/nft-minter/output/nft-minter.wasm \
     --recall-nonce --pem=/Users/umutsatir/Desktop/local-projects/blockchain/ridefi-multiversex/wallet/wallet-owner.pem \
     --gas-limit=10000000 \
-    --send --outfile="deploy-devnet.interaction.json" --wait-result \
-    --proxy=https://devnet-gateway.multiversx.com --chain=D
+    --send --outfile="deploy-testnet.interaction.json" --wait-result \
+    --proxy=https://testnet-gateway.multiversx.com --chain=T
 
     TRANSACTION=$(mxpy data parse --file="deploy-testnet.interaction.json" --expression="data['emittedTransactionHash']")
     ADDRESS=$(mxpy data parse --file="deploy-testnet.interaction.json" --expression="data['contractAddress']")

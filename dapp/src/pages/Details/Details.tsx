@@ -5,11 +5,15 @@ import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { pinata } from "utils/config";
 import { useEffect, useState } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GEMINI_API_KEY } from "config/config.env";
 
 export const Details = () => {
     const search = useLocation().search;
     const ipfsHash = new URLSearchParams(search).get("nft");
     const [metadata, setMetadata] = useState<any>({});
+    const [widthVar, setWidthVar] = useState(0);
+    const [progressBarColor, setProgressBarColor] = useState("#000000");
     useScrollToElement();
 
     useEffect(() => {
@@ -22,13 +26,61 @@ export const Details = () => {
             });
     }, [ipfsHash]);
 
-    const widthVar = 80;
-    const progressBarColor =
-        widthVar <= 30
-            ? "oklch(0.577 0.245 27.325)"
-            : widthVar <= 60
-            ? "oklch(0.795 0.184 86.047)"
-            : "oklch(0.627 0.194 149.214)";
+    async function handleAIPrediction() {
+        const apiKey = GEMINI_API_KEY;
+        if (!apiKey) {
+            throw new Error("GEMINI_API_KEY is not defined");
+        }
+        const genAI = new GoogleGenerativeAI(apiKey);
+        // The Gemini 1.5 models are versatile and work with most use cases
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+        const prompt = `Price prediction range for a car with the following features: brand:
+                        ${metadata.brand}
+                        ", model: 
+                        ${metadata.model}
+                        ", year: 
+                        ${metadata.year}
+                        ", fuel type: "
+                        ${metadata.fuelType}
+                        ", transmission, 
+                        ${metadata.transmission}
+                        ", mileage: 
+                        ${metadata.mileage}
+                        ", horsepower: 
+                        ${metadata.horsepower}. Give only the price range in USD, from and to values.`;
+
+        const prompt2 = `Give overall score for a car with the following features: brand:
+                        ${metadata.brand}
+                        ", model: 
+                        ${metadata.model}
+                        ", year: 
+                        ${metadata.year}
+                        ", fuel type: "
+                        ${metadata.fuelType}
+                        ", transmission, 
+                        ${metadata.transmission}
+                        ", mileage: 
+                        ${metadata.mileage}
+                        ", horsepower: 
+                        ${metadata.horsepower}. Give only number from 0 to 100.`;
+
+        const result = await model.generateContent([prompt]);
+        const response = await result.response;
+        document.getElementById("price-prediction")!.innerText =
+            response.text();
+
+        const result2 = await model.generateContent([prompt2]);
+        const response2 = await result2.response;
+        setWidthVar(parseInt(response2.text()));
+        setProgressBarColor(
+            widthVar <= 30
+                ? "oklch(0.627 0.194 149.214)"
+                : widthVar <= 60
+                ? "oklch(0.795 0.184 86.047)"
+                : "oklch(0.577 0.245 27.325)"
+        );
+    }
 
     return (
         <AuthRedirectWrapper>
@@ -39,7 +91,7 @@ export const Details = () => {
                         <img
                             src={"https://ipfs.io/ipfs/" + ipfsHash}
                             alt=""
-                            className="rounded-lg w=[500px] h-[500px]"
+                            className="rounded-lg w-[500px] h-[500px]"
                         />
                         <div className="flex flex-col gap-2.5 w-2/5 p-4">
                             <div className="flex justify-between gap-1">
@@ -85,7 +137,11 @@ export const Details = () => {
                             </div>
                             <div className="price-prediction mt-10">
                                 <div className="flex flex-col justify-between items-center gap-3">
-                                    <h1 className="font-bold">AI Score</h1>
+                                    <h1 className="font-bold">AI Prediction</h1>
+                                    <p
+                                        id="price-prediction"
+                                        className="text-sm text-green-700"
+                                    ></p>
                                     <div className="w-full flex gap-2.5 items-center">
                                         <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-300">
                                             <motion.div
@@ -116,6 +172,7 @@ export const Details = () => {
                         <button
                             type="button"
                             className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                            onClick={handleAIPrediction}
                         >
                             AI Price Prediction
                         </button>

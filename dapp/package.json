@@ -9,6 +9,7 @@
         "@fortawesome/fontawesome-svg-core": "6.5.1",
         "@fortawesome/free-solid-svg-icons": "6.5.1",
         "@fortawesome/react-fontawesome": "0.2.0",
+        "@google/generative-ai": "^0.22.0",
         "@multiversx/sdk-core": "13.16.0",
         "@multiversx/sdk-dapp": "^3.2.4",
         "axios": "1.7.4",

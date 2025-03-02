@@ -1,2 +1,3 @@
 dapp/node_modules
 node_modules
+dapp/.env.local
