@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@multiversx/sdk-dapp": "^3.2.4",
     "framer-motion": "^12.4.7"
   }
 }

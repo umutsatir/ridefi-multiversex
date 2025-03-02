@@ -3,15 +3,17 @@ import { getCallbackRoute } from "utils/getCallbackRoute";
 import { WidgetType } from "types/widget.types";
 import { useIsWebProvider } from "hooks";
 import "./Widget.css";
+import { pinata } from "utils/config";
+import { Car } from "../widgets";
 
 export const Widget = ({
     title,
     description,
     reference,
     anchor,
-    widget: MxWidget,
-    ...props
-}: WidgetType) => {
+    metadata,
+    imageurl,
+}: any) => {
     const { isWebProvider } = useIsWebProvider();
     const callbackRoute = anchor
         ? getCallbackRoute({ anchor, isWebProvider })
@@ -20,12 +22,16 @@ export const Widget = ({
     return (
         <div className="max-w-sm w-full max-h-96 specialCard shadow-lg ">
             <Card
-                title={title}
+                title={metadata.name}
                 description={description}
                 reference={reference}
                 anchor={anchor}
             >
-                <MxWidget callbackRoute={callbackRoute} {...props} />
+                <Car
+                    callbackRoute={callbackRoute}
+                    metadata={metadata.keyvalues}
+                    imageurl={imageurl}
+                />
             </Card>
         </div>
     );

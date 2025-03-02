@@ -9,7 +9,7 @@ interface OutputContainerPropsType
     isLoading?: boolean;
 }
 
-export const OutputContainer = (props: OutputContainerPropsType) => {
+export const OutputContainer = (props: any) => {
     const { children, isLoading = false, className = "p-4" } = props;
 
     const handleBuy = () => {
@@ -17,8 +17,8 @@ export const OutputContainer = (props: OutputContainerPropsType) => {
     };
 
     return (
-        <div className="flex justify-between gap-4">
-            <img src="https://picsum.photos/200" alt="" />
+        <div className="flex justify-between items-center gap-4">
+            <img src={props.imageurl} className="w-[150px] h-[150px]" alt="" />
             <div
                 className={classNames(
                     "text-sm border border-gray-200 rounded w-1/2",

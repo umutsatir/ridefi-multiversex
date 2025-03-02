@@ -2,7 +2,17 @@ import { AuthRedirectWrapper } from "wrappers";
 import { useScrollToElement } from "hooks";
 import { brands } from "../../localConstants/brands";
 import { useState } from "react";
-import { sendTransactions } from "@multiversx/sdk-dapp";
+import { smartContract } from "utils/smartContract";
+import {
+    Account,
+    Address,
+    AddressValue,
+    BigUIntValue,
+    BytesValue,
+} from "@multiversx/sdk-core/out";
+import { refreshAccount, sendTransactions } from "helpers";
+import { useGetAccountInfo } from "hooks";
+import { pinata } from "../../utils/config";
 
 export const Add = () => {
     useScrollToElement();
@@ -17,9 +27,73 @@ export const Add = () => {
     const [selectedHorsepower, setSelectedHorsepower] = useState<number>(0);
     const [selectedPrice, setSelectedPrice] = useState<number>(0);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const { address, account } = useGetAccountInfo();
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        // const issue = smartContract.methodsExplicit
+        //     .issueToken([
+        //         BytesValue.fromUTF8(selectedBrand),
+        //         BytesValue.fromUTF8(selectedBrand),
+        //     ])
+        //     .withValue("50000000000000000")
+        //     .withSender(Address.fromString(address))
+        //     .withGasLimit(100000000)
+        //     .buildTransaction()
+        //     .toPlainObject();
+
+        // const roles = smartContract.methodsExplicit
+        //     .setLocalRoles()
+        //     .withValue("0")
+        //     .withSender(Address.fromString(address))
+        //     .withGasLimit(100000000)
+        //     .buildTransaction()
+        //     .toPlainObject();
+
+        const upload = await pinata.upload.file(selectedImage as File, {
+            metadata: {
+                name: selectedBrand,
+                keyValues: {
+                    description: selectedDescription,
+                    brand: selectedBrand,
+                    model: selectedModel,
+                    year: selectedYear,
+                    fuelType: selectedFuelType,
+                    transmission: selectedTransmission,
+                    mileage: selectedMileage,
+                    horsepower: selectedHorsepower,
+                    price: selectedPrice,
+                },
+            },
+        });
+
+        const tx = smartContract.methodsExplicit
+            .createNft([
+                BytesValue.fromUTF8(selectedBrand.toUpperCase()),
+                new BigUIntValue(0),
+                BytesValue.fromUTF8(upload.IpfsHash.toString()),
+                new BigUIntValue(selectedPrice * 1000000000000000000),
+            ])
+            .withValue("0")
+            .withSender(Address.fromString(address))
+            .withGasLimit(100000000)
+            .buildTransaction()
+            .toPlainObject();
+
+        await refreshAccount();
+
+        await sendTransactions({
+            transactions: [tx],
+            transactionsDisplayInfo: {
+                processingMessage: "Processing mint transaction",
+                errorMessage: "An error has occured during mint",
+                successMessage: "Mint successful",
+            },
+            completedTransactionsDelay: 1000,
+            signWithoutSending: false,
+            redirectAfterSign: false,
+        });
     };
 
     return (
@@ -168,7 +242,9 @@ export const Add = () => {
                             }
                             required
                         >
-                            <option value="Gasoline">Gasoline</option>
+                            <option value="Gasoline" selected>
+                                Gasoline
+                            </option>
                             <option value="Diesel">Diesel</option>
                             <option value="Hybrid">Hybrid</option>
                             <option value="Electric">Electric</option>
@@ -186,7 +262,9 @@ export const Add = () => {
                             }
                             required
                         >
-                            <option value="Manual">Manual</option>
+                            <option value="Manual" selected>
+                                Manual
+                            </option>
                             <option value="Automatic">Automatic</option>
                         </select>
                     </div>
@@ -244,6 +322,12 @@ export const Add = () => {
                             $2,000 - $4,000
                         </p>
                     </div>
+                    <button
+                        type="submit"
+                        className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800"
+                    >
+                        Add Car
+                    </button>
                     <button
                         type="submit"
                         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"

@@ -1,9 +1,9 @@
-import { EnvironmentsEnum } from 'types';
+import { EnvironmentsEnum } from "types";
 
-export * from './sharedConfig';
+export * from "./sharedConfig";
 
 export const contractAddress =
-  'erd1qqqqqqqqqqqqqpgq8tq5rulzxzje29v8kzmcxx9pgx6kmevmep6qckwthl';
-export const API_URL = 'https://testnet-template-api.multiversx.com';
+    "erd1qqqqqqqqqqqqqpgqxy3nt549jkewmskyx8s5n4ws3u2eqrufqylqpc80sc";
+export const API_URL = "https://testnet-template-api.multiversx.com";
 export const sampleAuthenticatedDomains = [API_URL];
 export const environment = EnvironmentsEnum.testnet;

@@ -2,9 +2,26 @@ import { AuthRedirectWrapper } from "wrappers";
 import { useScrollToElement } from "hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
+import { pinata } from "utils/config";
+import { useEffect, useState } from "react";
 
 export const Details = () => {
+    const search = useLocation().search;
+    const ipfsHash = new URLSearchParams(search).get("nft");
+    const [metadata, setMetadata] = useState<any>({});
     useScrollToElement();
+
+    useEffect(() => {
+        if (!ipfsHash) return;
+        pinata
+            .listFiles()
+            .cid(ipfsHash)
+            .then((metadata) => {
+                setMetadata(metadata[0].metadata.keyvalues);
+            });
+    }, [ipfsHash]);
+
     const widthVar = 80;
     const progressBarColor =
         widthVar <= 30
@@ -20,51 +37,51 @@ export const Details = () => {
                     <h4 className="mt-3 text-4xl font-bold">Details</h4>
                     <div className="flex w-full justify-between p-10 gap-4">
                         <img
-                            src="https://picsum.photos/500/500"
+                            src={"https://ipfs.io/ipfs/" + ipfsHash}
                             alt=""
-                            className="rounded-lg"
+                            className="rounded-lg w=[500px] h-[500px]"
                         />
                         <div className="flex flex-col gap-2.5 w-2/5 p-4">
                             <div className="flex justify-between gap-1">
                                 <h1 className="font-bold">Price</h1>
                                 <p className=" text-red-600 text-xl font-bold">
-                                    2000 EGLD
+                                    {metadata.price} EGLD
                                 </p>
                             </div>
                             <hr />
                             <div className="flex justify-between gap-1 mt-7">
                                 <h1 className="font-bold">Brand</h1>
-                                <p>Volkswagen</p>
+                                <p>{metadata.brand}</p>
                             </div>
                             <hr />
                             <div className="flex justify-between gap-1">
                                 <h1 className="font-bold">Model</h1>
-                                <p>Golf</p>
+                                <p>{metadata.model}</p>
                             </div>
                             <hr />
                             <div className="flex justify-between gap-1">
                                 <h1 className="font-bold">Year</h1>
-                                <p>2013</p>
+                                <p>{metadata.year}</p>
                             </div>
                             <hr />
                             <div className="flex justify-between gap-1">
                                 <h1 className="font-bold">Fuel Type</h1>
-                                <p>Diesel</p>
+                                <p>{metadata.fuelType}</p>
                             </div>
                             <hr />
                             <div className="flex justify-between gap-1">
                                 <h1 className="font-bold">Transmission</h1>
-                                <p>Manual</p>
+                                <p>{metadata.transmission}</p>
                             </div>
                             <hr />
                             <div className="flex justify-between gap-1">
                                 <h1 className="font-bold">Mileage</h1>
-                                <p>100,000 miles</p>
+                                <p>{metadata.mileage} miles</p>
                             </div>
                             <hr />
                             <div className="flex justify-between gap-1">
                                 <h1 className="font-bold">Horsepower</h1>
-                                <p>250 hp</p>
+                                <p>{metadata.horsepower} hp</p>
                             </div>
                             <div className="price-prediction mt-10">
                                 <div className="flex flex-col justify-between items-center gap-3">
@@ -89,10 +106,6 @@ export const Details = () => {
                                         </div>
                                         <p className="text-sm font-bold">
                                             {widthVar % 100}%
-                                            <FontAwesomeIcon
-                                                icon={["fas", "info-circle"]}
-                                                className="text-gray-400 ml-2"
-                                            />
                                         </p>
                                     </div>
                                 </div>
