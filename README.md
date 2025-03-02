@@ -43,10 +43,11 @@ You can start the project with these commands in dapp folder.
 
 
 ## Screenshots:
-![screencapture-localhost-3000-search-2025-03-02-14_54_03](https://github.com/user-attachments/assets/e23b0cd1-83b7-45fd-b811-d0ad719c9bfa)
-![screencapture-localhost-3000-details-2025-03-02-14_54_20](https://github.com/user-attachments/assets/6a1a4c33-de05-440f-b86f-20d8cc0aad62)
-![screencapture-localhost-3000-dashboard-2025-03-02-14_31_08](https://github.com/user-attachments/assets/abd68c6e-5894-4add-9080-a366829522f0)
-![screencapture-localhost-3000-add-2025-03-02-14_53_27](https://github.com/user-attachments/assets/e569a7d1-f978-4b2e-b40b-5b985f6a13fa)
+![screencapture-localhost-3000-dashboard-2025-03-03-02_43_27](https://github.com/user-attachments/assets/c8072e64-0e72-45e2-8b03-d63d9329675d)
+![screencapture-localhost-3000-details-2025-03-03-02_43_40](https://github.com/user-attachments/assets/3d21d93c-3ec1-439d-8c92-fbab23d9d3a8)
+![screencapture-localhost-3000-add-2025-03-03-02_43_50](https://github.com/user-attachments/assets/c80302ec-e939-4ee3-b5a3-03cd71d33fdb)
+![screencapture-localhost-3000-search-2025-03-03-02_44_29](https://github.com/user-attachments/assets/19664a38-baae-4082-a23c-ad062ade546c)
+![screencapture-localhost-3000-2025-03-03-02_45_13](https://github.com/user-attachments/assets/6cd18ef4-73a4-49b9-ac9c-274b605adf30)
 
 
 ![digital-art-futuristic-fox-in-space-suit](https://github.com/user-attachments/assets/10ae02cd-a600-485d-a87b-0adb3380b271)
